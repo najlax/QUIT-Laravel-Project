@@ -6,7 +6,7 @@
         @method('PATCH')
         <x-forms.input label="العنوان بالعربية" name="arabic_title" placeholder="--" value="{{$dataset->arabic_title}}" />
         <x-forms.input label="العنوان بالانجليزية" name="english_title" placeholder="--" value="{{$dataset->english_title}}" />
-        <x-forms.input label="الوسوم" name="tags" placeholder="1445, طلاب, 1443" value="{{$dataset->tags}}"/>
+        <x-forms.input label="الوسوم" name="tags" placeholder="1445, طلاب, 1443" value="{{ $dataset->tags}}"/>
 
         <x-forms.select label="التحديث الدوري" name="updates" value="{{$dataset->updates}}">
             <option>سنوي</option>
