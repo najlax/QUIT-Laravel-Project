@@ -94,13 +94,10 @@ Route::patch('/index/datasets/{dataset}',function(Dataset $dataset){
 
     $dataset->update(Arr::except($attributes, 'tags'));
 
-    // Update the tags for the dataset, if provided
     if ($attributes['tags'] ?? false) {
-        // Split the tags into an array if they are provided as a string (comma-separated)
-        $tagsArray = explode(',', $attributes['tags']);
+        $tags = explode(',', $attributes['tags']);
         
-        // Sync the dataset's tags in the pivot table
-        $dataset->tags()->sync($tagsArray);  // Sync will update the pivot table
+        $dataset->tags()->sync($tags);  
     }
 
     return redirect('/index/datasets');

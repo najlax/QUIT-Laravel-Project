@@ -51,12 +51,8 @@ class DatasetController extends Controller
 
         if ($attributes['tags'] ?? false) {
             foreach (explode(',', $attributes['tags']) as $tag) {
-                $dataset->tag($tag);
+                $dataset->tag($tag)->sync($attributes['tags']);
             }
-        }
-
-        if (!empty($attributes['tags'])) {
-            $dataset->tags()->sync($attributes['tags']);
         }
     
         return redirect('/index/datasets');
