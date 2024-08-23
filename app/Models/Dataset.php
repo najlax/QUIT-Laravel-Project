@@ -23,22 +23,12 @@ class Dataset extends Model
     {
         $tag = Tag::firstOrCreate(['name'=>$name]);
 
-        $this->tags->attach($tag);
+        $this->tags->attach($tag->id);
 
     }
 
     public function tags():BelongsToMany
     {
-        return $this->belongsToMany(Tag::class);
-    }
-
-    public static function find($id)
-    {
-        $dataset =Arr::first(static::all(),fn($dataset)=>$dataset['id']=$id);
-
-        if(! $dataset){
-            abort(404);
-        }
-       return $dataset;
+        return $this->belongsToMany(Tag::class, 'dataset_tag');
     }
 }

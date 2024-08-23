@@ -6,6 +6,9 @@ use App\Models\Tag;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 use App\Models\Dataset;
+use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 
 class TagController extends Controller
 {
@@ -27,17 +30,24 @@ class TagController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Tag $tag)
     {
-        //
+        return view('createtag', ['tag'=>$tag]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTagRequest $request)
+    public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'name' => ['required'],
+        ]);
+
+        $tag = Tag::create($attributes);
+
+
+        return redirect('/index/tags');
     }
 
     /**

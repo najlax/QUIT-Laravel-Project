@@ -7,6 +7,7 @@
         <x-forms.input label="الوسم" name="name" placeholder="--" value="{{$tag->name}}" />
 
 
+
         <x-forms.button>تعديل</x-forms.button>
 
     </x-forms.form>

@@ -6,7 +6,16 @@
         @method('PATCH')
         <x-forms.input label="العنوان بالعربية" name="arabic_title" placeholder="--" value="{{$dataset->arabic_title}}" />
         <x-forms.input label="العنوان بالانجليزية" name="english_title" placeholder="--" value="{{$dataset->english_title}}" />
-        <x-forms.input label="الوسوم" name="tags" placeholder="1445, طلاب, 1443" value="{{ $dataset->tags}}"/>
+
+        <div class="flex">
+        @foreach($tags as $tag)
+        @if($dataset->tags->contains($tag))
+        <x-forms.checkbox label="{{$tag->name}}" name="{{$tag->name}}" value="{{$tag->id}}" checked></x-forms.checkbox>
+        @else
+        <x-forms.checkbox label="{{$tag->name}}" name="{{$tag->name}}" value="{{$tag->id}}"></x-forms.checkbox>
+        @endif
+        @endforeach
+        </div>
 
         <x-forms.select label="التحديث الدوري" name="updates" value="{{$dataset->updates}}">
             <option>سنوي</option>
@@ -18,6 +27,7 @@
             <option>منشور</option>
             <option>غير منشور</option>
         </x-forms.select>
+
 
         <x-forms.button>تعديل</x-forms.button>
 

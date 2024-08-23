@@ -4,7 +4,12 @@
     <x-forms.form method="POST" action="/index/datasets">
         <x-forms.input label="العنوان بالعربية" name="arabic_title" placeholder="--" />
         <x-forms.input label="العنوان بالانجليزية" name="english_title" placeholder="--" />
-        <x-forms.input label="الوسوم" name="tags" placeholder="1445, طلاب, 1443"/>
+        
+        <div class="flex">
+        @foreach($tags as $tag)
+        <x-forms.checkbox label="{{$tag->name}}" name="{{$tag->name}}" value="{{$tag->id}}"></x-forms.checkbox>
+        @endforeach
+        </div>
 
         <x-forms.select label="التحديث الدوري" name="updates">
             <option>سنوي</option>
@@ -16,6 +21,8 @@
             <option>منشور</option>
             <option>غير منشور</option>
         </x-forms.select>
+
+
 
         <x-forms.button>إرسال</x-forms.button>
 

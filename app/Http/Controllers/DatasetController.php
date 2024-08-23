@@ -29,7 +29,9 @@ class DatasetController extends Controller
      */
     public function create()
     {
-        return view('create');
+        return view('create', [
+            'tags' => Tag::all(),
+        ]);
     }
 
     /**
@@ -45,8 +47,6 @@ class DatasetController extends Controller
             'tags' => ['nullable'],
         ]);
 
-        //$attributes['featured'] = $request->has('featured');
-
         $dataset =Auth::user()->datasets()->create(Arr::except($attributes, 'tags'));
 
         if ($attributes['tags'] ?? false) {
@@ -55,6 +55,10 @@ class DatasetController extends Controller
             }
         }
 
+        if (!empty($attributes['tags'])) {
+            $dataset->tags()->sync($attributes['tags']);
+        }
+    
         return redirect('/index/datasets');
     }
 

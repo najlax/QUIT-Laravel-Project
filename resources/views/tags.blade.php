@@ -1,6 +1,11 @@
 @props(['tags'])
 <x-app-layout>
     <x-head> الوسوم</x-head>
+    <div class="mt-4 mx-2">
+    <a href="/index/tags/create">
+    <x-forms.button class="text-white">إضافة وسم جديد</x-forms.button>
+    </a>
+    </div>
     <div class="mt-12">
         <div class="bg-white overflow-auto">
             <table class="text-right w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->

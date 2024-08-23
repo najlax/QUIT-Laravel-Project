@@ -34,11 +34,17 @@ require __DIR__.'/auth.php';
 Route::get('/index/datasets',[DatasetController::class, 'index']);
 Route::get('/index/tags',[TagController::class,'index']);
 
+Route::get('/index/tags/create',[TagController::class,'create'])->middleware('auth');
+Route::post('/index/tags',[TagController::class,'store'])->middleware('auth');
+
+
 Route::get('/index/tags/{tag:name}',TagController::class);
 
 Route::get('/index/tags/{tag:name}/edit',function(Tag $tag){
     return view('edit-tag',['tag'=>$tag]);
 });
+
+
 Route::patch('/index/tags/{tag:name}',function(Tag $tag){
     $attributes= request()->validate([
         'name' => ['required','min:3'],
@@ -70,7 +76,10 @@ Route::post('/index/datasets',[DatasetController::class, 'store']);
 
 
 Route::get('/index/datasets/{dataset}/edit',function(Dataset $dataset){
-    return view('editdata',['dataset'=>$dataset]);
+    return view('editdata',[
+        'dataset'=>$dataset,
+        'tags'=>Tag::all(),
+    ]);
 });
 
 Route::patch('/index/datasets/{dataset}',function(Dataset $dataset){
